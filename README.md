@@ -3,7 +3,7 @@
 A phone-first household money app: monthly and yearly cash flow, net worth,
 spending by category, and a review inbox that gets new transactions to zero fast.
 
-**[Open the live demo →](https://sandeepgangarapu.github.io/money/)**
+**[Open the live demo →](https://sandeepgangarapu.com/money/)**
 
 The demo runs entirely in your browser with a fictional household (Alex and Sam,
 two jobs, a mortgage, a car loan and about 2,500 transactions over 30 months).
