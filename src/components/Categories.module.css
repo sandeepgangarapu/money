@@ -1,0 +1,240 @@
+.header {
+  display: grid;
+  gap: var(--s-1);
+  margin-bottom: var(--s-3);
+  padding: var(--s-4);
+}
+.headerCaption {
+  color: var(--ink-2);
+  font-size: var(--fs-sub);
+}
+.total {
+  font-size: var(--fs-hero);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.7px;
+}
+.stackedBar {
+  display: flex;
+  gap: 2px;
+  height: 10px;
+  margin-top: var(--s-2);
+  overflow: hidden;
+  border-radius: var(--r-pill);
+  background: var(--surface-2);
+}
+.stackedBar > span {
+  min-width: 0;
+  flex-basis: 0;
+  background: var(--category-color);
+}
+.list {
+  display: grid;
+}
+/* Every row keeps the chevron column so amounts and bars line up. */
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 44px;
+  align-items: center;
+}
+.row[data-depth="1"] + .row:not([data-depth]) {
+  margin-top: var(--s-1);
+}
+.open {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) auto;
+  column-gap: var(--s-2);
+  row-gap: var(--s-1);
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  min-height: 52px;
+  padding: var(--s-2) 0;
+  border: 0;
+  border-radius: var(--r-sm);
+  background: transparent;
+  text-align: left;
+}
+.marker {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  display: grid;
+  place-items: center;
+}
+.label {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-2);
+  min-width: 0;
+}
+.name {
+  overflow: hidden;
+  font-size: var(--fs-body);
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.share {
+  flex-shrink: 0;
+  color: var(--muted);
+  font-size: var(--fs-caption);
+  font-variant-numeric: tabular-nums;
+}
+.amount {
+  font-size: var(--fs-body);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+.bar {
+  grid-column: 2 / -1;
+  height: 4px;
+  overflow: hidden;
+  border-radius: var(--r-pill);
+  background: var(--surface-2);
+}
+.bar > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--category-color);
+}
+.toggle {
+  display: grid;
+  place-items: center;
+  align-self: stretch;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--faint);
+}
+.toggle > svg,
+.disclosure > svg {
+  transition: transform 0.15s;
+}
+.toggle[aria-expanded="false"] > svg,
+.disclosure[aria-expanded="false"] > svg {
+  transform: rotate(-90deg);
+}
+.row[data-depth="1"] .open {
+  grid-template-columns: 6px minmax(0, 1fr) auto;
+  min-height: 44px;
+  padding-left: calc(36px + var(--s-2));
+}
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--r-pill);
+  background: var(--category-color);
+}
+.row[data-depth="1"] .name {
+  color: var(--ink-2);
+  font-size: var(--fs-sub);
+  font-weight: 400;
+}
+.row[data-depth="1"] .share {
+  display: none;
+}
+.row[data-depth="1"] .amount {
+  font-size: var(--fs-sub);
+  font-weight: 500;
+}
+.row[data-depth="1"] .bar {
+  height: 3px;
+}
+.inactive {
+  margin-top: var(--s-2);
+  border-top: 1px solid var(--line);
+}
+.disclosure {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--s-2);
+  width: 100%;
+  min-height: 44px;
+  padding: var(--s-2) 0;
+  border: 0;
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--muted);
+  font-size: var(--fs-sub);
+  text-align: left;
+}
+.row[data-inactive="true"] .name,
+.row[data-inactive="true"] .amount {
+  color: var(--muted);
+}
+.row[data-inactive="true"] .marker {
+  opacity: 0.55;
+}
+@media (hover: hover) {
+  .open:hover,
+  .toggle:hover,
+  .disclosure:hover {
+    background: var(--surface-2);
+  }
+}
+.open,
+.toggle,
+.disclosure {
+  transition: background-color 90ms ease;
+}
+.open:active,
+.toggle:active,
+.disclosure:active {
+  background: var(--surface-3);
+}
+.summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--s-2);
+}
+.spent {
+  font-size: var(--fs-hero);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.7px;
+  line-height: 1.2;
+}
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s-2);
+  margin: var(--s-2) 0 0;
+}
+.metrics > div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-1);
+  min-width: 0;
+}
+.metrics dt {
+  color: var(--muted);
+  font-size: var(--fs-caption);
+}
+.metrics dd {
+  overflow-wrap: anywhere;
+  margin: 0;
+  font-size: var(--fs-body);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.monthHeading {
+  position: sticky;
+  /* Sit directly below the shared sheet's sticky header and its 44px control. */
+  top: calc(var(--s-5) + 44px + var(--s-2) + 1px);
+  z-index: 1;
+  margin: var(--s-2) 0 0;
+  padding: var(--s-2) 0;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink-2);
+  font-size: var(--fs-sub);
+  font-weight: 600;
+}

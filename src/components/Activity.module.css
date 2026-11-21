@@ -1,0 +1,105 @@
+.toolbar {
+  position: sticky;
+  /* Pin below the shell header (44px row + padding + hairline). */
+  top: calc(61px + env(safe-area-inset-top));
+  z-index: 8;
+  padding: var(--s-1) 0 var(--s-2);
+  background: var(--bg);
+}
+.searchRow {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+}
+.search {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  flex: 1;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0 var(--s-3);
+  background: var(--surface-2);
+  border-radius: var(--r-md);
+  color: var(--muted);
+}
+.search input {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font-size: var(--fs-body);
+}
+.search input::placeholder {
+  color: var(--muted);
+}
+.search input::-webkit-search-cancel-button {
+  display: none;
+}
+.search:focus-within {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+.search input:focus-visible {
+  outline: none;
+}
+.count {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--s-2);
+  padding: var(--s-3) 0;
+  font-size: var(--fs-caption);
+  color: var(--muted);
+}
+.day {
+  position: sticky;
+  /* Shell header (61px) plus the pinned toolbar (111px). */
+  top: calc(env(safe-area-inset-top) + 172px);
+  z-index: 2;
+  margin: 0;
+  padding: var(--s-2) var(--s-1);
+  background: var(--bg);
+  color: var(--ink-2);
+  font-size: var(--fs-sub);
+  font-weight: 600;
+}
+.entry {
+  border-bottom: 1px solid var(--line);
+}
+.entry > article {
+  border: 0;
+}
+.caption {
+  margin: var(--s-1) 0 var(--s-2);
+  color: var(--muted);
+  font-size: var(--fs-caption);
+}
+.batch {
+  padding-top: var(--s-2);
+}
+/* iOS Safari zooms into text fields smaller than 16px when they gain focus. */
+@media (pointer: coarse) {
+  .search input {
+    font-size: var(--fs-headline);
+  }
+}
+/* First load only: placeholder rows fade in if the list takes a moment. */
+.placeholders {
+  display: grid;
+  gap: var(--s-3);
+  padding: var(--s-2) 0;
+  animation: appear 200ms ease 300ms both;
+}
+.placeholders span {
+  height: 44px;
+  border-radius: var(--r-sm);
+  background: var(--surface-2);
+}
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+}

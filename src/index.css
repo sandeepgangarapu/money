@@ -1,0 +1,140 @@
+:root {
+  --bg: #f5f6f8;
+  --surface: #ffffff;
+  --surface-2: #f1f3f6;
+  --surface-3: #e9ecf0;
+  --ink: #0f172a;
+  --ink-2: #475569;
+  --muted: #64748b;
+  --faint: #a3adbd;
+  --line: #eceef2;
+  --accent: #2f6feb;
+  --accent-soft: #eaf1ff;
+  --accent-ink: #1d4fbf;
+  --positive: #047857;
+  --positive-fill: #10b981;
+  --positive-soft: #e7f7f0;
+  --negative: #dc2626;
+  --negative-soft: #fdecec;
+  --warning: #b45309;
+  --warning-soft: #fef3e2;
+  --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.05);
+  --shadow-pop: 0 12px 32px rgba(15, 23, 42, 0.16);
+  --backdrop: rgba(15, 23, 42, 0.35);
+  --blue: var(--accent);
+  --blue-soft: var(--accent-soft);
+  --green: var(--positive);
+  --orange: var(--warning);
+  --purple: #9468c8;
+  --pink: #c77291;
+  --gray: var(--muted);
+  --pie-blue: #3f78c8;
+  --pie-green: #257e65;
+  --pie-orange: #a86b21;
+  --pie-purple: #8054b0;
+  --pie-pink: #a95373;
+  --pie-gray: #5c718c;
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-card: 18px;
+  --r-sheet: 22px;
+  --r-pill: 999px;
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 20px;
+  --s-6: 24px;
+  --s-8: 32px;
+  --fs-display: 34px;
+  --fs-hero: 28px;
+  --fs-title: 22px;
+  --fs-headline: 17px;
+  --fs-body: 15px;
+  --fs-sub: 13px;
+  --fs-caption: 12px;
+  --fs-micro: 11px;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter",
+    "Segoe UI", Roboto, sans-serif;
+  font-size: var(--fs-body);
+  color: var(--ink);
+  background: var(--bg);
+  color-scheme: light only;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  min-width: 280px;
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+button,
+a,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+button,
+a {
+  touch-action: manipulation;
+}
+button {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: default;
+}
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+button {
+  color: inherit;
+}
+/* iOS Safari zooms into text fields smaller than 16px when they gain focus. */
+@media (pointer: coarse) {
+  input,
+  select,
+  textarea {
+    font-size: var(--fs-headline);
+  }
+}
+a {
+  color: inherit;
+}
+svg {
+  display: block;
+  flex-shrink: 0;
+}
+[hidden] {
+  display: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    animation: none !important;
+  }
+}
+/* Screen changes cross-fade quickly (View Transitions, where supported). */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 140ms;
+}

@@ -1,0 +1,372 @@
+.app {
+  min-height: 100svh;
+  background: var(--bg);
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.main {
+  max-width: 1120px;
+  margin: auto;
+  padding: 0 var(--s-3) calc(88px + env(safe-area-inset-bottom));
+}
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: calc(var(--s-2) + env(safe-area-inset-top)) 0 var(--s-2);
+  margin-bottom: var(--s-4);
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: saturate(180%) blur(16px);
+  border-bottom: 1px solid transparent;
+}
+.header[data-scrolled="true"] {
+  border-bottom-color: var(--line);
+}
+.header h1 {
+  margin: 0 auto 0 0;
+  font-size: var(--fs-title);
+  font-weight: 700;
+  letter-spacing: -.6px;
+  line-height: 1.2;
+}
+.demoPill {
+  margin-left: var(--s-2);
+  padding: 2px var(--s-2);
+  border: 0;
+  border-radius: var(--r-pill);
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  font: inherit;
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  letter-spacing: 0;
+  vertical-align: middle;
+  transition: transform 90ms ease;
+}
+.demoPill:active {
+  transform: scale(0.94);
+}
+.header h1:has(.demoPill) {
+  white-space: nowrap;
+}
+/* Only the demo build renders the pill; it needs the small-phone layout sooner. */
+@media (max-width: 440px) {
+  .header:has(.demoPill) {
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  .header:has(.demoPill) .monthPicker {
+    order: 1;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .header:has(.demoPill) > .iconButton {
+    margin-left: auto;
+  }
+}
+.monthPicker {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.iconButton {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: transparent;
+  color: var(--ink-2);
+}
+.iconButton:disabled {
+  opacity: 0.35;
+}
+.iconButton,
+.monthLabel {
+  transition: transform 90ms ease, background-color 90ms ease;
+}
+.iconButton:active:not(:disabled) {
+  transform: scale(0.9);
+  background: var(--surface-3);
+}
+.monthLabel:active {
+  transform: scale(0.96);
+}
+.monthLabel {
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: var(--fs-sub);
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+}
+.monthLabel small {
+  display: block;
+  margin-top: var(--s-1);
+  color: var(--muted);
+  font-size: var(--fs-caption);
+  font-weight: 400;
+}
+.statusDot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--r-pill);
+  background: var(--positive-fill);
+}
+.statusDot[data-state="attention"] {
+  background: var(--warning);
+}
+.statusDot[data-state="busy"] {
+  width: 14px;
+  height: 14px;
+  background: transparent;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  animation: spin .8s linear infinite;
+}
+.bottomNav {
+  position: fixed;
+  z-index: 12;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--line);
+  padding: var(--s-2) var(--s-2) calc(var(--s-2) + env(safe-area-inset-bottom));
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  backdrop-filter: saturate(180%) blur(16px);
+}
+.bottomNav a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-1);
+  min-height: 44px;
+  color: var(--muted);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  text-decoration: none;
+}
+.bottomNav a[aria-current="page"] {
+  color: var(--accent);
+}
+.navIcon {
+  position: relative;
+  transition: transform 120ms ease;
+}
+.bottomNav a:active .navIcon {
+  transform: scale(0.86);
+}
+.badge {
+  position: absolute;
+  left: 16px;
+  top: -6px;
+  display: grid;
+  place-items: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 var(--s-1);
+  border-radius: var(--r-pill);
+  background: var(--accent);
+  color: var(--surface);
+  font-size: var(--fs-micro);
+  font-weight: 600;
+}
+.errorToast {
+  position: fixed;
+  z-index: 25;
+  bottom: calc(84px + env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: var(--s-1);
+  width: min(calc(100% - 24px), 560px);
+  padding: var(--s-2) var(--s-3);
+  border: 1px solid var(--negative);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  box-shadow: var(--shadow-pop);
+  font-size: var(--fs-sub);
+}
+.errorToast > span {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.monthYears {
+  display: grid;
+  gap: var(--s-5);
+}
+.monthYears h3 {
+  margin: 0 0 var(--s-2);
+  font-size: var(--fs-sub);
+  color: var(--muted);
+  font-weight: 600;
+}
+.monthGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--s-2);
+}
+.monthCell {
+  display: grid;
+  align-content: start;
+  gap: var(--s-1);
+  min-height: 48px;
+  padding: var(--s-2);
+  border: 0;
+  border-radius: var(--r-md);
+  background: var(--surface-2);
+  text-align: left;
+  font-size: var(--fs-sub);
+  transition: transform 90ms ease, background-color 90ms ease;
+}
+.monthCell[data-empty] {
+  background: transparent;
+  color: var(--faint);
+}
+.monthCell[data-current] {
+  box-shadow: inset 0 0 0 1.5px var(--accent);
+}
+.monthCell[aria-current] {
+  background: var(--accent);
+  color: var(--surface);
+}
+.monthCell:active:not([data-empty]) {
+  transform: scale(0.95);
+}
+.monthName {
+  font-weight: 600;
+}
+.monthSpend {
+  color: var(--muted);
+  font-size: var(--fs-micro);
+  white-space: nowrap;
+}
+.monthCell[aria-current] .monthSpend {
+  color: inherit;
+}
+.monthBar {
+  height: 4px;
+  width: calc(var(--share) * 100%);
+  border-radius: var(--r-pill);
+  background: var(--accent);
+  opacity: 0.45;
+}
+.monthCell[aria-current] .monthBar {
+  background: var(--surface);
+  opacity: 0.8;
+}
+.statusLines {
+  display: grid;
+  gap: var(--s-4);
+}
+.statusLines p {
+  margin: 0;
+  padding-bottom: var(--s-4);
+  border-bottom: 1px solid var(--line);
+}
+.statusLines strong {
+  display: block;
+  font-size: var(--fs-body);
+  font-weight: 600;
+}
+.statusLines span {
+  display: block;
+  margin-top: var(--s-2);
+  font-size: var(--fs-sub);
+  line-height: 1.5;
+  color: var(--muted);
+}
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-3);
+  border-radius: var(--r-card);
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--surface) 40%, transparent),
+    transparent
+  );
+  transform: translateX(-100%);
+  animation: shimmer 1.8s ease-in-out infinite;
+}
+/* Placeholders appear only if loading takes longer than a moment. */
+.placeholders {
+  animation: appear 200ms ease 300ms both;
+}
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+}
+/* A month that is still loading stays visible, dimmed, after a short delay. */
+.main [data-month-scoped] {
+  transition: opacity 150ms ease;
+}
+.main[data-switching="true"] [data-month-scoped] {
+  opacity: 0.55;
+  transition-delay: 120ms;
+}
+.skeletonBlock {
+  height: 220px;
+  margin-bottom: var(--s-4);
+}
+.skeletonBlock:last-child {
+  height: 340px;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes shimmer {
+  to {
+    transform: translateX(100%);
+  }
+}
+@media (min-width: 740px) {
+  .bottomNav {
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(100%, 720px);
+    border-radius: var(--r-card) var(--r-card) 0 0;
+  }
+}
+@media (max-width: 370px) {
+  .header {
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  .monthPicker {
+    order: 1;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .header > .iconButton {
+    margin-left: auto;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .statusDot[data-state="busy"],
+  .skeleton::after {
+    animation: none;
+  }
+}

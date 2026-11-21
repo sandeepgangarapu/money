@@ -1,0 +1,76 @@
+.trend {
+  position: relative;
+  margin: var(--s-3) 0 var(--s-1);
+}
+.chart {
+  display: block;
+  overflow: visible;
+  touch-action: pan-y;
+  cursor: crosshair;
+  border-radius: var(--r-sm);
+}
+.stopTop {
+  stop-color: var(--accent);
+  stop-opacity: 0.16;
+}
+.stopBottom {
+  stop-color: var(--accent);
+  stop-opacity: 0;
+}
+.baseline {
+  stroke: var(--line);
+  stroke-width: 1;
+}
+.line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  animation: draw 900ms cubic-bezier(0.3, 0.7, 0.2, 1) both;
+}
+.area {
+  animation: fade 500ms ease 600ms both;
+}
+.rule {
+  stroke: var(--faint);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+.dot {
+  fill: var(--surface);
+  stroke: var(--accent);
+  stroke-width: 2.5;
+}
+.tooltip {
+  position: absolute;
+  top: calc(-1 * var(--s-6));
+  transform: translateX(-50%);
+  padding: var(--s-1) var(--s-2);
+  border-radius: var(--r-sm);
+  background: var(--ink);
+  color: var(--surface);
+  font-size: var(--fs-caption);
+  font-weight: 600;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.axis {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--s-1);
+  color: var(--muted);
+  font-size: var(--fs-micro);
+}
+@keyframes draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}

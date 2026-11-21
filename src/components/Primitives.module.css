@@ -1,0 +1,147 @@
+.emojiTile {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--r-sm);
+  background: color-mix(in srgb, var(--category-color) 16%, var(--surface));
+  font-size: var(--fs-headline);
+  line-height: 1;
+  font-weight: 600;
+}
+.emojiTile[data-size="28"] {
+  width: 28px;
+  height: 28px;
+  font-size: var(--fs-body);
+}
+.emojiTile[data-size="56"] {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--r-md);
+  font-size: var(--fs-hero);
+  font-weight: 600;
+}
+.dot {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  border: 2px solid var(--surface);
+  border-radius: var(--r-pill);
+  background: var(--accent);
+}
+.segmented {
+  display: inline-flex;
+  max-width: 100%;
+  padding: var(--s-1);
+  border-radius: var(--r-pill);
+  background: var(--surface-2);
+}
+.segmented button {
+  position: relative;
+  isolation: isolate;
+  flex: 1;
+  min-width: 44px;
+  min-height: 44px;
+  padding: var(--s-2) var(--s-3);
+  border: 0;
+  border-radius: var(--r-pill);
+  background: transparent;
+  color: var(--ink-2);
+  font-size: var(--fs-body);
+  font-weight: 500;
+}
+.segmented button[aria-checked="true"] {
+  color: var(--ink);
+}
+.segmented button:active {
+  opacity: 0.7;
+}
+.segmented button[aria-checked="true"]::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+.segmented[data-size="sm"] button {
+  font-size: var(--fs-sub);
+}
+.segmented[data-size="sm"] button::before {
+  inset: var(--s-1) 0;
+}
+.button {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--s-2);
+  min-width: 44px;
+  min-height: 44px;
+  padding: var(--s-2) var(--s-4);
+  border: 0;
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--surface);
+  font-size: var(--fs-body);
+  font-weight: 600;
+}
+.button::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--accent);
+}
+.button[data-variant="secondary"] {
+  color: var(--ink);
+}
+.button[data-variant="secondary"]::before {
+  background: var(--surface-2);
+}
+.button[data-variant="ghost"] {
+  color: var(--accent);
+}
+.button[data-variant="ghost"]::before {
+  background: transparent;
+}
+.button[data-size="sm"] {
+  font-size: var(--fs-sub);
+  padding: var(--s-2) var(--s-3);
+}
+.button[data-size="sm"]::before {
+  inset: var(--s-1) 0;
+}
+@media (hover: hover) {
+  .button:hover:not(:disabled)::before {
+    filter: brightness(0.97);
+  }
+  .button[data-variant="ghost"]:hover:not(:disabled)::before {
+    background: var(--surface-3);
+  }
+}
+/* Pressed feedback lands in the same frame as the tap. */
+.button {
+  transition: transform 90ms ease;
+}
+.button:active:not(:disabled) {
+  transform: scale(0.97);
+}
+.button:active:not(:disabled)::before {
+  filter: brightness(0.92);
+}
+.button[data-variant="ghost"]:active:not(:disabled)::before,
+.button[data-variant="secondary"]:active:not(:disabled)::before {
+  filter: none;
+  background: var(--surface-3);
+}
+.button:disabled {
+  opacity: 0.5;
+}
